@@ -227,7 +227,12 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Load all custom mappings
-local paths = vim.split(vim.fn.glob('~/.config/nvim/lua/custom/mappings/*lua'), '\n')
+local paths
+if vim.fn.has('win32') then
+  paths = vim.split(vim.fn.glob('C:\\Users\\Teo\\AppData\\Local\\nvim\\lua\\custom\\mappings\\*lua'), '\n')
+else
+  paths = vim.split(vim.fn.glob('~/.config/nvim/lua/custom/mappings/*lua'), '\n')
+end
 for _, file in pairs(paths) do
   vim.cmd('source ' .. file)
 end
