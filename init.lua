@@ -430,10 +430,10 @@ local servers = {
   robotframework_ls = {
     robot = {
       variables = {
-        -- workspace_path = "/home/developer/git/testSct/a14/obc-fsw-test-scripts-sct/com.invap.obcfsw.scripts",
-        workspace_path = "/home/developer/git/testSct/sabiamar/sm-obc-fsw-test-scripts-sct/com.invap.smobcfsw.scripts",
+        workspace_path = vim.fn.getcwd(),
       },
     },
+    cmd = { vim.fn.getcwd() .. "/../../sct-client-satellital_1.4.0/bin/robotframework_ls" }
   },
 
   lua_ls = {
@@ -466,7 +466,8 @@ mason_lspconfig.setup_handlers {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes
+      filetypes = (servers[server_name] or {}).filetypes,
+      cmd = servers[server_name].cmd or {}
     }
   end,
 }
