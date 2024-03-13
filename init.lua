@@ -467,7 +467,7 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
-      cmd = servers[server_name].cmd or {}
+      cmd = (servers[server_name] or {}).cmd
     }
   end,
 }
