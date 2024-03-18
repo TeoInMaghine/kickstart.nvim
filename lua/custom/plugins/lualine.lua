@@ -1,7 +1,7 @@
 return {
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons', 'rmagatti/auto-session' },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         opts = {
             options = {
                 icons_enabled = true,
@@ -15,8 +15,8 @@ return {
                 sections =
                 {
                     lualine_a = {'mode'},
-                    lualine_b = {require("auto-session.lib").current_session_name},
-                    lualine_c = {'branch'},
+                    lualine_b = {'branch'},
+                    lualine_c = {}, -- Eventually I would put the LSP load progress
                     lualine_x = {'diagnostics'},
                     lualine_y = {'location'},
                     lualine_z = {'buffers'}

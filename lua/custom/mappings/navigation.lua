@@ -5,8 +5,9 @@ vim.keymap.set({ 'n', 'v' }, 'K', '5kzz', { silent = true })
 vim.keymap.set('n', '<leader>j', 'J', { silent = true })
 
 -- More comfy home and end of line
-vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$g_', { silent = true })
-vim.keymap.set({ 'n', 'v', 'o' }, 'H', '0_', { silent = true })
+vim.keymap.set({ 'n', 'v', 'o' }, 'L', 'g_', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'H', '^ze', { silent = true })
+vim.keymap.set({ 'o' }, 'H', '^', { silent = true })
 
 -- After gg or G, be able to use 'g to jump back
 vim.keymap.set({ 'n', 'v' }, 'gg', 'mggg', { silent = true })
