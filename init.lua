@@ -20,6 +20,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local highlight = {
+  "CursorColumn",
+  "Whitespace",
+}
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -114,7 +118,14 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    opts = {
+      indent = { highlight = highlight, char = "" },
+      whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = false,
+      },
+      scope = { enabled = false },
+    },
   },
 
   -- "gc" to comment visual regions/lines
@@ -159,7 +170,7 @@ require('lazy').setup({
 vim.api.nvim_set_hl(0, 'Comment', { fg = '#F5D938' })
 
 -- Turn off word wrapping
-vim.opt.wrap = false
+vim.o.wrap = false
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -167,7 +178,9 @@ vim.o.hlsearch = false
 -- Relative and absolute line numbers
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.wo.signcolumn = "number"
+
+-- Keep signcolumn on by default
+vim.wo.signcolumn = 'yes'
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -176,10 +189,37 @@ vim.o.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'
 
 -- Set tab to 4 spaces
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
+vim.o.smarttab = true
+
+-- The above thing doesn't exactly work, it sometimes aligns by 4-space columns
+vim.keymap.set({ 'i' }, '<Tab>', '<Space><Space><Space><Space>', { silent = true })
+-- vim.keymap.set({ 'i' }, '<BS>', function() Backspace() end, { silent = true })
+
+-- function Backspace()
+--   local x = vim.fn.col('.')
+--   if x then
+--     vim.cmd("normal dll")
+--     return ""
+--   end
+--
+--   for i=1, 4 do
+--     local x = vim.fn.col('.')
+--   end
+--   -- if x == vim.fn.col('.') then
+--   --     vim.cmd("normal 0")
+--   -- end
+--   vim.cmd("normal dl")
+--   vim.cmd("normal dl")
+--   return ""
+-- end
+
+-- Show tab and space-characters
+vim.o.list = true
+vim.o.listchars = "eol:↵,tab:→ ,space:⸱,extends:▶,precedes:◀,nbsp:‿"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -190,9 +230,6 @@ vim.o.undofile = true
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -286,7 +323,7 @@ vim.defer_fn(function()
     modules = {},
 
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = false },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -483,29 +520,14 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    -- <C-Space> will pop up the completion window, or confirm when it's already visible
+    ['<C-Space>'] = cmp.mapping(function()
       if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+        cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace })
       else
-        fallback()
+        cmp.complete()
       end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    end),
   },
   sources = {
     { name = 'nvim_lsp' },
