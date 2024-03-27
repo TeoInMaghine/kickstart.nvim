@@ -12,3 +12,6 @@ vim.keymap.set({ 'n' }, 'ga', ':cd ~/git/testSct/a14/obc-fsw-test-scripts-sct/co
 -- Go to Sabiamar
 vim.keymap.set({ 'n' }, 'gs', ':cd ~/git/testSct/a14/obc-fsw-test-scripts-sct/com.invap.obcfsw.scripts/<CR>',
     { silent = true, desc = '[G]o to [S]abiamar' })
+
+-- Remove this when I can make it work on filetype
+vim.keymap.set({ 'i' }, '<Tab>', '<Space><Space><Space><Space>', { silent = true })

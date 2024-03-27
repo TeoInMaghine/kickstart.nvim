@@ -195,28 +195,6 @@ vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.smarttab = true
 
--- The above thing doesn't exactly work, it sometimes aligns by 4-space columns
-vim.keymap.set({ 'i' }, '<Tab>', '<Space><Space><Space><Space>', { silent = true })
--- vim.keymap.set({ 'i' }, '<BS>', function() Backspace() end, { silent = true })
-
--- function Backspace()
---   local x = vim.fn.col('.')
---   if x then
---     vim.cmd("normal dll")
---     return ""
---   end
---
---   for i=1, 4 do
---     local x = vim.fn.col('.')
---   end
---   -- if x == vim.fn.col('.') then
---   --     vim.cmd("normal 0")
---   -- end
---   vim.cmd("normal dl")
---   vim.cmd("normal dl")
---   return ""
--- end
-
 -- Show tab and space-characters
 vim.o.list = true
 vim.o.listchars = "eol:↵,tab:→ ,space:⸱,extends:▶,precedes:◀,nbsp:‿"
