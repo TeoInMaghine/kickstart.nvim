@@ -9,7 +9,8 @@ vim.keymap.set({ 'n' }, '<leader>x', ':Neotree close<CR>:qa<CR>', { silent = tru
 -- Switch between buffers
 vim.keymap.set({ 'n' }, '<leader>h', ':bp<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>l', ':bn<CR>', { silent = true })
-vim.keymap.set({ 'n' }, '<leader>b', ':b#<CR>', { silent = true })
+vim.keymap.set({ 'n' }, '<leader>b', ':b ', { silent = true })
+vim.keymap.set({ 'n' }, '<C-U>', ':b#<CR>', { silent = true })
 
 
 

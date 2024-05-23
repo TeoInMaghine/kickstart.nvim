@@ -21,14 +21,27 @@ vim.keymap.set({ 'n' }, 'gs', ':cd ~/git/testSct/a14/obc-fsw-test-scripts-sct/co
 vim.keymap.set({ 'n' }, '<Leader>c', function() CopyToRunScriptFromConsole() end,
     { silent = true, desc = 'Run in [C]onsole' })
 
+-- Copy execution of individual TestCase to clipboard, to paste in terminal
+vim.keymap.set({ 'n' }, '<Leader>t', function() CopyToRunTestCaseFromConsole() end,
+    { silent = true, desc = 'Run [T]est Case in console' })
+
 function CopyToRunScriptFromConsole()
     local file_path = vim.fn.expand("%:p")
-    vim.cmd(':redir @+ | echon "robot --variable workspace_path:$PWD --splitlog --consolewidth 160 ' ..
-    '--consolecolors on --debugfile ${0##*/}.log --loglevel TRACE --outputdir ./output ' ..
-    file_path .. ' && source $PWD/../tools/remove_xml.sh $PWD/test-suite/output_runrobot" | redir END')
+    vim.cmd('redir @+ | echon "robot --variable workspace_path:$PWD --splitlog --consolewidth 160 ' ..
+        '--consolecolors on --debugfile ${0##*/}.log --loglevel TRACE --outputdir ./output ' ..
+        file_path .. ' && source $PWD/../tools/remove_xml.sh $PWD/test-suite/output_runrobot" | redir END')
     return ""
 end
 
--- Copy execution of individual TestCase to clipboard, to paste in terminal
--- robot -t testcase1 mytestsuite.robot
+function CopyToRunTestCaseFromConsole()
+    -- If the cursor is in the TestCase, it will copy that
+    vim.cmd.normal{'0Y'}
+    local test_case = vim.fn.getreg("+")
 
+    local file_path = vim.fn.expand("%:p")
+    vim.cmd('redir @+ | echon "robot --variable workspace_path:$PWD --splitlog --consolewidth 160 ' ..
+        '--consolecolors on --debugfile ${0##*/}.log --loglevel TRACE --outputdir ./output ' ..
+        '-t ' .. test_case .. ' ' ..
+        file_path .. ' && source $PWD/../tools/remove_xml.sh $PWD/test-suite/output_runrobot" | redir END')
+    return ""
+end
