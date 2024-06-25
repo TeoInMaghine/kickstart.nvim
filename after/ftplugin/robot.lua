@@ -10,18 +10,12 @@ vim.keymap.set({ 'n' }, '<leader>oo',
     ':exe \':silent !google-chrome \' .. getcwd() .. \'/test-suite/output_runrobot/log.html\'<CR>',
     { silent = true, desc = '[O]pen [O]utput in [C]hrome' })
 
--- Go to A14
-vim.keymap.set({ 'n' }, 'ga', ':cd ~/git/testSct/a14/obc-fsw-test-scripts-sct/com.invap.obcfsw.scripts/<CR>',
-    { silent = true, desc = '[G]o to [A]14' })
--- Go to Sabiamar
-vim.keymap.set({ 'n' }, 'gs', ':cd ~/git/testSct/a14/obc-fsw-test-scripts-sct/com.invap.obcfsw.scripts/<CR>',
-    { silent = true, desc = '[G]o to [S]abiamar' })
-
 -- Copy execution of individual script to clipboard, to paste in terminal
 vim.keymap.set({ 'n' }, '<Leader>c', function() CopyToRunScriptFromConsole() end,
     { silent = true, desc = 'Run in [C]onsole' })
 
 -- Copy execution of individual TestCase to clipboard, to paste in terminal
+-- Must be with the cursor placed on the Test Case
 vim.keymap.set({ 'n' }, '<Leader>t', function() CopyToRunTestCaseFromConsole() end,
     { silent = true, desc = 'Run [T]est Case in console' })
 
