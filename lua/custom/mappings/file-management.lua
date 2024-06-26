@@ -1,6 +1,6 @@
 -- Easier save, save and quit, quit & quit all
 -- Instead of :q I use :bd to close the buffer
--- When I want to close everything I use the :qa mapping
+-- When I want to close everything I use the :qa mapping (plus closing Neotree)
 vim.keymap.set({ 'n' }, '<leader>q', ':bd<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>w', ':w<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>z', ':wq<CR>', { silent = true })
@@ -12,7 +12,7 @@ vim.keymap.set({ 'n' }, '<leader>l', ':bn<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>b', ':b ', { silent = true })
 vim.keymap.set({ 'n' }, '<C-U>', ':b#<CR>', { silent = true })
 -- Delete other buffers (except the current one)
-vim.keymap.set({ 'n' }, '<leader>ob', ':%bd|e#<CR>', { silent = true, desc = 'Delete [O]ther [B]uffers' })
+vim.keymap.set({ 'n' }, '<leader>ob', ':%bd|e#|bd#<CR>', { silent = true, desc = 'Delete [O]ther [B]uffers' })
 
 
 
