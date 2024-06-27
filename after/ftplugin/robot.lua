@@ -1,3 +1,6 @@
+-- This is to align with team conventions & not have unnecessary diffs
+vim.o.fixeol = false
+
 -- Setting tabstop & the others doesn't exactly work, it sometimes aligns by 4-space columns
 vim.keymap.set({ 'i' }, '<Tab>', '<Space><Space><Space><Space>', { silent = true })
 -- Could make Backspace remove up to 4 spaces, for now I won't do it though
