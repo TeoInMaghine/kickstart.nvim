@@ -17,7 +17,7 @@ return {
                      -- Eventually I could put the LSP load progress
                     lualine_a = {'mode'},
                     lualine_b = {'branch'},
-                    lualine_c = {'filename', 'diff', 'diagnostics'},
+                    lualine_c = {'diff', 'diagnostics'},
                     lualine_x = {'buffers', 'diagnostics'},
                     lualine_y = {'progress'},
                     lualine_z = {'location'}

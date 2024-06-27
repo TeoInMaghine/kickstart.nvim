@@ -10,6 +10,7 @@ vim.keymap.set({ 'n' }, '<leader>x', ':Neotree close<CR>:qa<CR>', { silent = tru
 vim.keymap.set({ 'n' }, '<leader>h', ':bp<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>l', ':bn<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>b', ':b ', { silent = true })
+-- Switch to last buffer
 vim.keymap.set({ 'n' }, '<C-U>', ':b#<CR>', { silent = true })
 -- Delete other buffers (except the current one)
 vim.keymap.set({ 'n' }, '<leader>ob', ':%bd|e#|bd#<CR>', { silent = true, desc = 'Delete [O]ther [B]uffers' })

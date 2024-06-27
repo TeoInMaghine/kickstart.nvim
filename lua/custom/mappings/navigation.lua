@@ -30,11 +30,6 @@ function LineEnd()
     return ""
 end
 
--- After gg or G, be able to use 'g to jump back
-vim.keymap.set({ 'n', 'v' }, 'gg', 'mggg', { silent = true })
-vim.keymap.set({ 'n', 'v' }, 'G', 'mgG', { silent = true })
-
 -- Half page up and down
 vim.keymap.set({ 'n', 'v' }, '<C-B>', '<C-B>zz', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-D>', '<C-D>zz', { silent = true })
-
