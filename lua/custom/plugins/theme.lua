@@ -3,7 +3,9 @@ return {
         'sainnhe/sonokai',
         priority = 1000,
         config = function()
-            if (require('auto-session.lib').current_session_name == "placeholder") then
+            if (string.find(vim.fn.getcwd(), "sm")) then
+                vim.g.sonokai_style = 'espresso'
+            elseif (string.find(vim.fn.getcwd(), "obc")) then
                 vim.g.sonokai_style = 'andromeda'
             else
                 vim.g.sonokai_style = 'default'
