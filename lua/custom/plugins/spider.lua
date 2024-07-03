@@ -1,6 +1,7 @@
 return {
     {
         "chrisgrieser/nvim-spider",
+        skipInsignificantPunctuation = false,
         keys = {
             -- Lazy loading on keystroke, .setup() call is optional
             {
