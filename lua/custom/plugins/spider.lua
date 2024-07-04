@@ -1,7 +1,6 @@
 return {
     {
         "chrisgrieser/nvim-spider",
-        skipInsignificantPunctuation = false,
         keys = {
             -- Lazy loading on keystroke, .setup() call is optional
             {
@@ -22,6 +21,11 @@ return {
                 mode = { "n", "o", "x" },
                 desc = "Spider-b"
             },
-        }
+        },
+        config = function()
+            require('spider').setup({
+                skipInsignificantPunctuation = false,
+            })
+        end
     },
 }
