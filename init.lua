@@ -223,7 +223,6 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
-vim.g.have_nerd_font = true
 vim.o.termguicolors = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
@@ -477,6 +476,7 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = { disable = { 'missing-fields' } },
     },
   },
 
@@ -526,7 +526,7 @@ cmp.setup {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(4),
     -- <C-Space> will pop up the completion window, or confirm when it's already visible
     ['<C-Space>'] = cmp.mapping(function()
       if cmp.visible() then
