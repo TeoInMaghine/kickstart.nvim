@@ -2,10 +2,8 @@
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"0p', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0P', { silent = true })
 
--- Paste into command line
-vim.keymap.set('c', '<C-S-V>', '<C-R>+', { silent = true })
--- Paste in insert mode
-vim.keymap.set('i', '<C-V>', '<C-R>+', { silent = true })
+-- Paste in command & insert modes
+vim.keymap.set({ 'c', 'i' }, '<C-V>', '<C-R>+', { silent = true })
 
 -- Switch lines
 vim.keymap.set({ 'n' }, '<A-j>', ':m .+1<CR>', { silent = true })
