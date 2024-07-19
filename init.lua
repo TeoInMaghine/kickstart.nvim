@@ -277,6 +277,10 @@ require('telescope').setup {
         ['<C-t>'] = false,
       },
     },
+    preview = {
+      -- 1 MB file size limit to preview
+      filesize_limit = 1
+    },
   },
   pickers = {
     live_grep = {
