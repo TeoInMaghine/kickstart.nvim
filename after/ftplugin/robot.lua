@@ -14,13 +14,13 @@ vim.keymap.set({ 'n' }, '<leader>oo',
     { silent = true, desc = '[O]pen [O]utput in [C]hrome' })
 
 -- Copy execution of individual script to clipboard, to paste in terminal
-vim.keymap.set({ 'n' }, '<Leader>c', function() CopyToRunScriptFromConsole() end,
-    { silent = true, desc = 'Run in [C]onsole' })
+vim.keymap.set({ 'n' }, '<Leader>cs', function() CopyToRunScriptFromConsole() end,
+    { silent = true, desc = 'Run in [C]onsole: [S]cript' })
 
 -- Copy execution of individual TestCase to clipboard, to paste in terminal
 -- Must be with the cursor placed on the Test Case
-vim.keymap.set({ 'n' }, '<Leader>t', function() CopyToRunTestCaseFromConsole() end,
-    { silent = true, desc = 'Run [T]est Case in console' })
+vim.keymap.set({ 'n' }, '<Leader>ct', function() CopyToRunTestCaseFromConsole() end,
+    { silent = true, desc = 'Run in [C]onsole: [T]est Case' })
 
 function CopyToRunScriptFromConsole()
     local file_path = vim.fn.expand("%:p")
