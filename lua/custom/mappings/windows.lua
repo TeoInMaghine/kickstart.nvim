@@ -12,3 +12,4 @@ vim.keymap.set({ 'n' }, '<C-W>-', '10<C-W>-', { silent = true })
 
 -- Split and go to the split
 vim.keymap.set({ 'n' }, '<C-W>v', '<C-W>v<C-W>w', { silent = true })
+vim.keymap.set({ 'n' }, '<C-W>h', '<C-W>h<C-W>w', { silent = true })
