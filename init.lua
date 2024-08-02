@@ -42,6 +42,8 @@ require('lazy').setup({
   -- Text objects
   'kana/vim-textobj-user',
 
+  { 'habamax/vim-godot', event = 'VimEnter' },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -324,7 +326,7 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'robot', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'xml', 'markdown' },
+    ensure_installed = { 'robot', 'c', 'cpp', 'go', 'lua', 'python', 'gdscript', 'godot_resource', 'gdshader', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'xml', 'markdown' },
     sync_install = false,
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -424,7 +426,7 @@ local on_attach = function(_, bufnr)
   -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- nmap('<leader>k', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>k', vim.lsp.buf.hover, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -509,6 +511,18 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
       cmd = (servers[server_name] or {}).cmd
     }
+
+    -- Can't add 'gdscript' to servers because it is not listed in Mason. So :MasonInstall gdscript won't work
+    local gdscript_config = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {},
+    }
+    if vim.loop.os_uname().sysname ~= 'Linux' then
+      -- Windows specific. Requires nmap installed (`winget install nmap`)
+      gdscript_config["cmd"] = { "ncat", "localhost", os.getenv("GDScript_Port") or "6005" }
+    end
+    require("lspconfig").gdscript.setup(gdscript_config)
   end,
 }
 
