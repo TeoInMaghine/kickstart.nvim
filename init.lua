@@ -249,6 +249,12 @@ for _, file in pairs(paths) do
   vim.cmd('source ' .. file)
 end
 
+-- Godot specific config
+local project_file = vim.fn.getcwd() .. '\\project.godot'
+if project_file then
+  vim.fn.serverstart '127.0.0.1:55432'
+end
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
