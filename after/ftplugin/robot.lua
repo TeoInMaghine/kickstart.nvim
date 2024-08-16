@@ -1,5 +1,6 @@
 -- This is to align with team conventions & not have unnecessary diffs
 vim.o.fixeol = false
+vim.opt_local.spell = true
 
 -- Setting tabstop & the others doesn't exactly work, it sometimes aligns by 4-space columns
 vim.keymap.set({ 'i' }, '<Tab>', '<Space><Space><Space><Space>', { silent = true })
