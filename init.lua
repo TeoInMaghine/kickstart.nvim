@@ -286,10 +286,6 @@ require('telescope').setup {
         ['<C-t>'] = false,
       },
     },
-    preview = {
-      -- 1 MB file size limit to preview
-      filesize_limit = 1
-    },
   },
   pickers = {
     live_grep = {
@@ -341,7 +337,10 @@ vim.defer_fn(function()
     ignore_install = {},
     modules = {},
 
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      disable = { "xml" },
+    },
     indent = { enable = false },
     incremental_selection = {
       enable = true,
