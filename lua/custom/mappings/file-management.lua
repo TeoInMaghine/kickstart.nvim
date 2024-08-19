@@ -2,9 +2,11 @@
 -- Instead of :q I use :bd to close the buffer
 -- When I want to close everything I use the :qa mapping (plus closing Neotree)
 vim.keymap.set({ 'n' }, '<leader>q', ':bd<CR>', { silent = true })
+vim.keymap.set({ 'n' }, '<leader>Q', ':bd!<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>w', ':w<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>z', ':wq<CR>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>x', ':Neotree close<CR>:qa<CR>', { silent = true })
+vim.keymap.set({ 'n' }, '<leader>X', ':Neotree close<CR>:qa!<CR>', { silent = true })
 
 -- Switch between buffers
 vim.keymap.set({ 'n' }, '<leader>h', ':bp<CR>', { silent = true })
