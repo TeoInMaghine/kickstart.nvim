@@ -247,7 +247,7 @@ else
 
   -- Godot specific config
   local project_file = vim.fn.getcwd() .. '\\project.godot'
-  if project_file then
+  if vim.fn.filereadable(project_file) ~= 0 then
     vim.fn.serverstart '127.0.0.1:55432'
   end
 end
@@ -490,8 +490,6 @@ local servers = {
       diagnostics = { disable = { 'missing-fields' } },
     },
   },
-
-  pylsp = {}
 }
 
 -- Setup neovim lua configuration
@@ -529,6 +527,22 @@ mason_lspconfig.setup_handlers {
       gdscript_config["cmd"] = { "ncat", "localhost", os.getenv("GDScript_Port") or "6005" }
     end
     require("lspconfig").gdscript.setup(gdscript_config)
+
+    -- Botched this up real quick so that I have those pesky warnings disabled
+    local python_config = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        pylsp = {
+          plugins = {
+            pylint = { enabled = false },
+            pyflakes = { enabled = false },
+            pycodestyle = { enabled = false },
+          }
+        }
+      }
+    }
+    require('lspconfig').pylsp.setup(python_config)
   end,
 }
 
