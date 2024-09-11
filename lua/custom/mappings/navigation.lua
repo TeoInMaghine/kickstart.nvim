@@ -13,4 +13,5 @@ vim.keymap.set({ 'n', 'v' }, '<C-F>', '<C-F>zz', { silent = true })
 
 -- More comfy start and end of line
 vim.keymap.set({ 'n', 'v', 'o' }, 'H', '_ze', { silent = true })
+vim.keymap.set({ 'o' }, 'H', '^', { silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'L', 'g_', { silent = true })
