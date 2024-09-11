@@ -229,6 +229,8 @@ vim.o.termguicolors = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+-- Minimal number of characters to keep before and after the cursor.
+vim.opt.sidescrolloff = 10
 
 -- [[ Basic Keymaps ]]
 
