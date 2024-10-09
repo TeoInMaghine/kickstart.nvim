@@ -16,6 +16,8 @@ vim.keymap.set({ 'n' }, '<leader>b', ':b ', { silent = true })
 vim.keymap.set({ 'n' }, '<C-S>', ':b#<CR>', { silent = true })
 -- Delete other buffers (except the current one)
 vim.keymap.set({ 'n' }, '<leader>ob', ':%bd|e#|bd#<CR>', { silent = true, desc = 'Delete [O]ther [B]uffers' })
+-- Delete all buffers
+vim.keymap.set({ 'n' }, '<leader>ab', ':%bd<CR>', { silent = true, desc = 'Delete [A]ll [B]uffers' })
 
 
 
