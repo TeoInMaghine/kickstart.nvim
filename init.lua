@@ -81,7 +81,17 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  {
+    'folke/which-key.nvim',
+    opts = {},
+    -- document existing key chains
+    spec = {
+      { "<leader>c", group = "Run in [C]onsole" },
+      { "<leader>d", group = "[D]iagnostics" },
+      { "<leader>g", group = "[G]it" },
+      { "<leader>s", group = "[S]earch" },
+    }
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -177,6 +187,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 vim.api.nvim_set_hl(0, 'Comment', { fg = '#F5D938' })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#FFD900' })
 
 -- Turn off word wrapping
 vim.o.wrap = false
@@ -190,6 +201,7 @@ vim.wo.relativenumber = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
+vim.o.cursorline = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -441,14 +453,6 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
-
--- document existing key chains
-require('which-key').register {
-  ['<leader>d'] = { name = '[D]iagnostics', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>c'] = { name = 'Run in [C]onsole', _ = 'which_key_ignore' },
-}
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
