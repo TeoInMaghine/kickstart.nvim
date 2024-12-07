@@ -5,6 +5,7 @@ return {
         lazy = false,
         opts = {
             -- Y E S
+            bigfile = { enabled = true },
             quickfile = { enabled = true },
             -- bufdelete could be useful
             -- gitbrowse could be useful (if it works with gitlab mostly)
