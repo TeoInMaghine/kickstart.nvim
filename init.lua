@@ -483,7 +483,7 @@ local servers = {
         workspace_path = vim.fn.getcwd(),
       },
     },
-    cmd = { vim.fn.getcwd() .. "/../../sct-client-satellital_1.4.0/bin/robotframework_ls" }
+    cmd = { vim.fn.getcwd() .. "/../../sct-client-satellital_2.0.0rc/bin/robotframework_ls" }
   },
 
   lua_ls = {
