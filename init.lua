@@ -462,6 +462,12 @@ require('mason-lspconfig').setup()
 -- Disable lsp logging (it's supposedly faster)
 vim.lsp.set_log_level("off")
 
+local rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../../sct*/bin/robotframework_ls")
+-- This is so there isn't an error when not in a RF project
+if rf_cmd_path == "" then
+  rf_cmd_path = vim.fn.getcwd()
+end
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -483,7 +489,7 @@ local servers = {
         workspace_path = vim.fn.getcwd(),
       },
     },
-    cmd = { vim.fn.getcwd() .. "/../../sct-client-satellital_2.0.0rc/bin/robotframework_ls" }
+    cmd = { rf_cmd_path }
   },
 
   lua_ls = {
