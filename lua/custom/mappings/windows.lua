@@ -13,3 +13,6 @@ vim.keymap.set({ 'n' }, '<C-W>-', '10<C-W>-', { silent = true })
 -- Split and go to the split
 vim.keymap.set({ 'n' }, '<C-W>v', '<C-W>v<C-W>w', { silent = true })
 vim.keymap.set({ 'n' }, '<C-W>s', '<C-W>s<C-W>w', { silent = true })
+
+-- Exit terminal mode
+vim.keymap.set({ 't' }, '<Esc>', '<C-\\><C-n>', { silent = true })
