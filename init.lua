@@ -463,10 +463,6 @@ require('mason-lspconfig').setup()
 vim.lsp.set_log_level("off")
 
 local rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../../sct*/bin/robotframework_ls")
--- This is so there isn't an error when not in a RF project
-if rf_cmd_path == "" then
-  rf_cmd_path = vim.fn.getcwd()
-end
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -488,6 +484,9 @@ local servers = {
       variables = {
         workspace_path = vim.fn.getcwd(),
       },
+      python = {
+        executable = nil,
+      }
     },
     cmd = { rf_cmd_path }
   },
@@ -500,6 +499,14 @@ local servers = {
     },
   },
 }
+
+-- This is so there aren't errors when not in a satellital RF project
+if rf_cmd_path == "" then
+  servers.robotframework_ls.robot.variables.workspace_path = nil
+  -- Necessary for libraries installed locally to work
+  servers.robotframework_ls.robot.python.executable = "/usr/bin/python3"
+  servers.robotframework_ls.cmd = nil
+end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
