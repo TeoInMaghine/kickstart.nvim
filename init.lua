@@ -452,6 +452,12 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      border = "rounded",
+    }
+  )
 end
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -592,6 +598,10 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+  },
+  window = {
+    documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
   },
 }
 
