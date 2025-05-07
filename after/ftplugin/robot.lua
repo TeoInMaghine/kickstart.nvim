@@ -6,13 +6,7 @@ vim.opt_local.spell = true
 vim.keymap.set({ 'i' }, '<Tab>', '<Space><Space><Space><Space>', { silent = true })
 -- Could make Backspace remove up to 4 spaces, for now I won't do it though
 
--- Open current file in Google Chrome
-vim.keymap.set({ 'n' }, '<leader>oc', ':exe \':silent !google-chrome %\'<CR>',
-    { silent = true, desc = '[O]pen in [C]hrome' })
--- Open in individual output in Google Chrome
-vim.keymap.set({ 'n' }, '<leader>oo',
-    ':exe \':silent !google-chrome \' .. getcwd() .. \'/test-suite/output_runrobot/log.html\'<CR>',
-    { silent = true, desc = '[O]pen [O]utput in [C]hrome' })
+-- Satellital section
 
 -- Copy execution of individual script to clipboard, to paste in terminal
 vim.keymap.set({ 'n' }, '<Leader>cs', function() CopyToRunScriptFromConsole() end,
@@ -41,5 +35,33 @@ function CopyToRunTestCaseFromConsole()
         '--consolecolors on --debugfile ${0##*/}.log --loglevel TRACE --outputdir ./output ' ..
         '-t ' .. test_case .. ' ' ..
         file_path .. ' && source $PWD/../tools/remove_xml.sh $PWD/test-suite/output_runrobot" | redir END')
+    return ""
+end
+
+-- RMA UC Section
+
+-- Copy command to execute individual suite, to paste in the terminal
+vim.keymap.set({ 'n' }, '<Leader>cus', function() CopyToRunUcSuiteFromConsole() end,
+    { silent = true, desc = 'Run in [C]onsole: RMA [U]C [S]uite' })
+
+-- Copy command to execute individual suite, to paste in the terminal
+-- Must be done with the cursor placed on the Test Case
+vim.keymap.set({ 'n' }, '<Leader>cut', function() CopyToRunUcTestCaseFromConsole() end,
+    { silent = true, desc = 'Run in [C]onsole: RMA [U]C [T]est Case' })
+
+function CopyToRunUcSuiteFromConsole()
+    local file_name_without_extension = vim.fn.expand("%:t:r")
+    vim.cmd('redir @+ | echon "robot --argumentfile data/arguments.txt --suite ' ..
+        file_name_without_extension .. ' tests/" | redir END')
+    return ""
+end
+
+function CopyToRunUcTestCaseFromConsole()
+    -- If the cursor is in the TestCase, it will copy that
+    vim.cmd.normal{'0Y'}
+    local test_case = vim.fn.getreg("+")
+
+    vim.cmd('redir @+ | echon "robot --argumentfile data/arguments.txt --test ' ..
+        test_case .. ' tests/" | redir END')
     return ""
 end
