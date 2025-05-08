@@ -245,6 +245,9 @@ vim.opt.scrolloff = 10
 -- Minimal number of characters to keep before and after the cursor.
 vim.opt.sidescrolloff = 10
 
+-- Set spelling languages
+vim.opt.spelllang = "en,es"
+
 -- [[ Basic Keymaps ]]
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
