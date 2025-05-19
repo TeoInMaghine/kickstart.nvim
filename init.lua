@@ -471,8 +471,6 @@ require('mason-lspconfig').setup()
 -- Disable lsp logging (it's supposedly faster)
 vim.lsp.set_log_level("off")
 
-local rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../../sct*/bin/robotframework_ls")
-
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -491,13 +489,15 @@ local servers = {
   robotframework_ls = {
     robot = {
       variables = {
-        workspace_path = vim.fn.getcwd(),
+        workspace_path = nil,
       },
       python = {
-        executable = nil,
-      }
+        -- Necessary for libraries installed locally to work
+        executable = "/usr/bin/python3",
+      },
+      libraries = { libdoc = { needsArgs = nil } },
     },
-    cmd = { rf_cmd_path }
+    cmd = { nil }
   },
 
   lua_ls = {
@@ -509,12 +509,22 @@ local servers = {
   },
 }
 
--- This is so there aren't errors when not in a satellital RF project
-if rf_cmd_path == "" then
-  servers.robotframework_ls.robot.variables.workspace_path = nil
-  -- Necessary for libraries installed locally to work
-  servers.robotframework_ls.robot.python.executable = "/usr/bin/python3"
-  servers.robotframework_ls.cmd = nil
+-- Configure based on the environment
+local sat_rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../../sct*/bin/robotframework_ls")
+local rma_uc_rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../uc-venv/bin/robotframework_ls")
+
+-- Satellital environment
+if sat_rf_cmd_path ~= "" then
+  servers.robotframework_ls.cmd = { sat_rf_cmd_path }
+  servers.robotframework_ls.robot.python.executable = nil
+  servers.robotframework_ls.robot.variables.workspace_path = vim.fn.getcwd()
+end
+
+-- RMA UC environment
+if rma_uc_rf_cmd_path ~= "" then
+  servers.robotframework_ls.cmd = { rma_uc_rf_cmd_path }
+  servers.robotframework_ls.robot.python.executable = nil
+  servers.robotframework_ls.robot.libraries.libdoc.needsArgs = { "cyt_mocks.SubsystemMock" }
 end
 
 -- Setup neovim lua configuration
