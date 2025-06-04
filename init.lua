@@ -36,6 +36,12 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  {
+    'shumphrey/fugitive-gitlab.vim',
+    config = function ()
+      vim.g.fugitive_gitlab_domains = {'https://git.partners.invap.com.ar/', 'https://git.invap.com.ar/'}
+    end
+  },
 
   -- Exchange
   'tommcdo/vim-exchange',
