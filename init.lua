@@ -236,6 +236,9 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Substitute global flag on by default
+vim.o.gdefault = true
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
@@ -253,6 +256,9 @@ vim.opt.sidescrolloff = 10
 
 -- Set spelling languages
 vim.opt.spelllang = "en,es"
+
+-- Change definition of "words": add accented characters (and other special characters), remove underscore
+vim.opt.iskeyword = "@,48-57,128-255"
 
 -- [[ Basic Keymaps ]]
 
