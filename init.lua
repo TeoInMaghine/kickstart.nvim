@@ -49,6 +49,25 @@ require('lazy').setup({
   -- Text objects
   'kana/vim-textobj-user',
 
+  -- Move by CamelCase and snake_case words
+  -- It's better than Spider because it works with the custom iskeyword option config
+  {
+    'bkad/CamelCaseMotion',
+    config = function ()
+      vim.g.camelcasemotion_key = '<leader>'
+
+      -- Overwrite default mappings
+      vim.keymap.set({ 'n', 'v', 'o' }, 'w', '<Plug>CamelCaseMotion_w', { silent = true })
+      vim.keymap.set({ 'n', 'v', 'o' }, 'b', '<Plug>CamelCaseMotion_b', { silent = true })
+      vim.keymap.set({ 'n', 'v', 'o' }, 'e', '<Plug>CamelCaseMotion_e', { silent = true })
+      vim.keymap.set({ 'n', 'v', 'o' }, 'ge', '<Plug>CamelCaseMotion_ge', { silent = true })
+
+      -- Text objects. ib captures backward, ie forwards & iw forwards with the underscore.
+      vim.keymap.set({ 'o', 'x' }, 'ic', '<Plug>CamelCaseMotion_ib', { silent = true })
+      vim.keymap.set({ 'o', 'x' }, 'ac', '<Plug>CamelCaseMotion_iw', { silent = true })
+    end
+  },
+
   { 'habamax/vim-godot', event = 'VimEnter' },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -257,8 +276,8 @@ vim.opt.sidescrolloff = 10
 -- Set spelling languages
 vim.opt.spelllang = "en,es"
 
--- Change definition of "words": add accented characters (and other special characters), remove underscore
-vim.opt.iskeyword = "@,48-57,128-255"
+-- Change definition of "words": add accented characters (and other special characters)
+vim.opt.iskeyword = "@,48-57,_,128-255"
 
 -- [[ Basic Keymaps ]]
 

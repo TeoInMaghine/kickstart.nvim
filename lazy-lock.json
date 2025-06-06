@@ -1,4 +1,5 @@
 {
+  "CamelCaseMotion": { "branch": "master", "commit": "de439d7c06cffd0839a29045a103fe4b44b15cdc" },
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "ce0a05ab4e2839e1c48d072c5236cce846a387bc" },
   "auto-session": { "branch": "main", "commit": "7b1b30d3424b7ca0fb4d12ce3f3d1977cf7c5691" },
