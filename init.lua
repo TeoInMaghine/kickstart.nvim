@@ -519,9 +519,7 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   robotframework_ls = {
     robot = {
-      variables = {
-        workspace_path = nil,
-      },
+      variables = nil,
       python = {
         -- Necessary for libraries installed locally to work
         executable = "/usr/bin/python3",
@@ -548,14 +546,13 @@ local rma_uc_rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../uc-venv/bin/robot
 if sat_rf_cmd_path ~= "" then
   servers.robotframework_ls.cmd = { sat_rf_cmd_path }
   servers.robotframework_ls.robot.python.executable = nil
-  servers.robotframework_ls.robot.variables.workspace_path = vim.fn.getcwd()
+  servers.robotframework_ls.robot.variables = { workspace_path = vim.fn.getcwd() }
 end
 
 -- RMA UC environment
 if rma_uc_rf_cmd_path ~= "" then
   servers.robotframework_ls.cmd = { rma_uc_rf_cmd_path }
   servers.robotframework_ls.robot.python.executable = nil
-  servers.robotframework_ls.robot.libraries.libdoc.needsArgs = { "cyt_mocks.SubsystemMock" }
 end
 
 -- Setup neovim lua configuration
