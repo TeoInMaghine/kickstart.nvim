@@ -579,17 +579,18 @@ mason_lspconfig.setup_handlers {
       cmd = (servers[server_name] or {}).cmd
     }
 
-    -- Can't add 'gdscript' to servers because it is not listed in Mason. So :MasonInstall gdscript won't work
-    local gdscript_config = {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {},
-    }
+    -- Moved this to just happen in Windows, 'cause otherwise it causes annoying warnings on startup (at least on WSL)
     if vim.loop.os_uname().sysname ~= 'Linux' then
+      -- Can't add 'gdscript' to servers because it is not listed in Mason. So :MasonInstall gdscript won't work
+      local gdscript_config = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {},
+      }
       -- Windows specific. Requires nmap installed (`winget install nmap`)
       gdscript_config["cmd"] = { "ncat", "localhost", os.getenv("GDScript_Port") or "6005" }
+      require("lspconfig").gdscript.setup(gdscript_config)
     end
-    require("lspconfig").gdscript.setup(gdscript_config)
 
     -- Botched this up real quick so that I have those pesky warnings disabled
     local python_config = {
@@ -599,7 +600,7 @@ mason_lspconfig.setup_handlers {
         pylsp = {
           plugins = {
             pylint = { enabled = false },
-            pyflakes = { enabled = false },
+            -- pyflakes = { enabled = false },
             pycodestyle = { enabled = false },
           }
         }
