@@ -553,6 +553,10 @@ end
 if rma_uc_rf_cmd_path ~= "" then
   servers.robotframework_ls.cmd = { rma_uc_rf_cmd_path }
   servers.robotframework_ls.robot.python.executable = nil
+  -- When cyt_mocks gets updated, the libspec breaks. A temporary fix that works is 
+  -- uncommenting the line below and evaluating twice the port parameters (i.e.: port=${${GP_PORT}}).
+  -- Then everything can go back to normal, and the libspec gets cached for normal use.
+  -- servers.robotframework_ls.robot.libraries.libdoc.needsArgs = { "cyt_mocks.SubsystemMock" }
 end
 
 -- Setup neovim lua configuration
