@@ -540,7 +540,7 @@ local servers = {
 
 -- Configure based on the environment
 local sat_rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../../sct*/bin/robotframework_ls")
-local rma_uc_rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../uc-venv/bin/robotframework_ls")
+local rma_uc_rf_cmd_path = vim.fn.glob(vim.fn.getcwd() .. "/../.venv/bin/robotframework_ls")
 
 -- Satellital environment
 if sat_rf_cmd_path ~= "" then
@@ -556,7 +556,7 @@ if rma_uc_rf_cmd_path ~= "" then
   -- When cyt_mocks gets updated, the libspec breaks. A temporary fix that works is 
   -- uncommenting the line below and evaluating twice the port parameters (i.e.: port=${${GP_PORT}}).
   -- Then everything can go back to normal, and the libspec gets cached for normal use.
-  -- servers.robotframework_ls.robot.libraries.libdoc.needsArgs = { "cyt_mocks.SubsystemMock" }
+  servers.robotframework_ls.robot.libraries.libdoc.needsArgs = { "cyt_mocks.SubsystemMock" }
 end
 
 -- Setup neovim lua configuration
